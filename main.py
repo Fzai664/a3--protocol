@@ -1,43 +1,31 @@
-"""
-A3 Protocol Demo
-Autonomous AI Agent Accountability System
-"""
-
-from src.agent.agent import A3Agent
-from src.accountability import Accountability
 from src.verifier import Verifier
 
 
-def main():
-
-    agent = A3Agent("agent_001")
-
-    context = {
-        "market": "DeFi",
-        "task": "risk analysis"
-    }
-
-    decision = agent.make_decision(context)
-
-    verifier = Verifier()
-    result = verifier.validate(decision)
-
-    accountability = Accountability()
-
-    record = accountability.create_record(
-        agent.agent_id,
-        decision
-    )
-
-    print("Decision:")
-    print(decision)
-
-    print("\nVerification:")
-    print(result)
-
-    print("\nAccountability Record:")
-    print(record)
+# Agent's predefined SLA
+sla = {
+    "max_trade_amount": 1000,
+    "allowed_protocols": [
+        "Jupiter",
+        "Raydium"
+    ],
+    "max_slippage": 0.01,
+    "max_leverage": 2
+}
 
 
-if __name__ == "__main__":
-    main()
+# Simulated agent action
+action = {
+    "agent": "Agent-001",
+    "protocol": "Jupiter",
+    "amount": 1500,
+    "slippage": 0.005,
+    "leverage": 1
+}
+
+
+verifier = Verifier(sla)
+
+result = verifier.validate(action)
+
+print("\n=== A3 Verification Result ===")
+print(result)
